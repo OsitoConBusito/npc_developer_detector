@@ -88,7 +88,9 @@ class _OptionCardState extends State<OptionCard>
                   ? NpcSpacing.borderThick
                   : NpcSpacing.borderThin,
             ),
-            boxShadow: widget.isSelected ? NpcShadows.hard() : NpcShadows.hardSmall(),
+            boxShadow: widget.isSelected
+                ? NpcShadows.hard()
+                : NpcShadows.hardSmall(),
           ),
           child: Row(
             children: [
@@ -97,7 +99,9 @@ class _OptionCardState extends State<OptionCard>
                 width: NpcSpacing.optionLabelSize,
                 height: NpcSpacing.optionLabelSize,
                 decoration: BoxDecoration(
-                  color: widget.isSelected ? NpcColors.primary : NpcColors.surfaceLight,
+                  color: widget.isSelected
+                      ? NpcColors.primary
+                      : NpcColors.surfaceLight,
                   borderRadius: BorderRadius.circular(NpcSpacing.radiusSm),
                   border: Border.all(
                     color: borderColor,
@@ -108,7 +112,9 @@ class _OptionCardState extends State<OptionCard>
                   child: Text(
                     widget.label,
                     style: NpcTypography.bodySmall.copyWith(
-                      color: widget.isSelected ? Colors.white : NpcColors.textPrimary,
+                      color: widget.isSelected
+                          ? Colors.white
+                          : NpcColors.textPrimary,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -127,7 +133,7 @@ class _OptionCardState extends State<OptionCard>
               AnimatedOpacity(
                 duration: NpcDurations.normal,
                 opacity: widget.isSelected ? 1.0 : 0.0,
-                child: Icon(
+                child: const Icon(
                   Icons.check_circle_rounded,
                   color: NpcColors.primary,
                   size: NpcSpacing.iconSm,

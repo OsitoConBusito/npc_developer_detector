@@ -9,7 +9,7 @@ import 'package:npc_developer_detector/router/app_router.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  LocaleSettings.setLocale(AppLocale.en);
+  await LocaleSettings.setLocale(AppLocale.en);
   runApp(ProviderScope(child: TranslationProvider(child: const NpcApp())));
 }
 

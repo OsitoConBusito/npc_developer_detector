@@ -42,19 +42,13 @@ class StoryCard extends StatelessWidget {
             const SizedBox(height: 24),
 
             Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 32,
-                vertical: 14,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
               decoration: BoxDecoration(
                 border: Border.all(color: NpcColors.lightBorder, width: 4),
                 borderRadius: BorderRadius.circular(16),
                 color: color.withValues(alpha: 0.15),
-                boxShadow: [
-                  BoxShadow(
-                    color: NpcColors.lightBorder,
-                    offset: const Offset(6, 6),
-                  ),
+                boxShadow: const [
+                  BoxShadow(color: NpcColors.lightBorder, offset: Offset(6, 6)),
                 ],
               ),
               child: Text(
