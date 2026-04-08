@@ -3,7 +3,7 @@ part of 'ds.dart';
 class NpcTypography {
   NpcTypography._();
 
-  static TextStyle _spaceMono({
+  static TextStyle _font({
     required double fontSize,
     FontWeight? fontWeight,
     Color? color,
@@ -22,82 +22,77 @@ class NpcTypography {
     );
   }
 
-  // Headlines
-  static final TextStyle displayLarge = _spaceMono(
+  static TextStyle get displayLarge => _font(
     fontSize: 48,
     fontWeight: FontWeight.w700,
-    color: NpcColors.matrixGreen,
+    color: NpcColors.textPrimary,
     height: 1.1,
     letterSpacing: -1.5,
   );
 
-  static TextStyle displayMedium = _spaceMono(
+  static TextStyle get displayMedium => _font(
     fontSize: 32,
     fontWeight: FontWeight.w700,
-    color: NpcColors.matrixGreen,
+    color: NpcColors.textPrimary,
     height: 1.15,
     letterSpacing: -1,
   );
 
-  static TextStyle displaySmall = _spaceMono(
+  static TextStyle get displaySmall => _font(
     fontSize: 24,
     fontWeight: FontWeight.w700,
     color: NpcColors.textPrimary,
     height: 1.2,
   );
 
-  // Score display
-  static TextStyle scoreDisplay = _spaceMono(
+  static TextStyle get scoreDisplay => _font(
     fontSize: 72,
     fontWeight: FontWeight.w700,
-    color: NpcColors.matrixGreen,
+    color: NpcColors.primary,
     height: 1,
     letterSpacing: -2,
   );
 
-  // Body
-  static TextStyle bodyLarge = _spaceMono(
+  static TextStyle get bodyLarge => _font(
     fontSize: 16,
     color: NpcColors.textSecondary,
     height: 1.5,
   );
 
-  static TextStyle bodyMedium = _spaceMono(
+  static TextStyle get bodyMedium => _font(
     fontSize: 14,
     color: NpcColors.textSecondary,
     height: 1.5,
   );
 
-  static TextStyle bodySmall = _spaceMono(
+  static TextStyle get bodySmall => _font(
     fontSize: 12,
     color: NpcColors.textMuted,
     height: 1.4,
   );
 
-  // Buttons
-  static TextStyle buttonLarge = _spaceMono(
+  static TextStyle get buttonLarge => _font(
     fontSize: 16,
     fontWeight: FontWeight.w700,
-    color: NpcColors.background,
+    color: NpcColors.lightBackground,
     letterSpacing: 1,
   );
 
-  static TextStyle buttonMedium = _spaceMono(
+  static TextStyle get buttonMedium => _font(
     fontSize: 14,
     fontWeight: FontWeight.w700,
     color: NpcColors.textPrimary,
     letterSpacing: 0.5,
   );
 
-  // Labels
-  static final TextStyle label = _spaceMono(
+  static TextStyle get label => _font(
     fontSize: 12,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w700,
     color: NpcColors.textMuted,
     letterSpacing: 1,
   );
 
-  static TextStyle optionText = _spaceMono(
+  static TextStyle get optionText => _font(
     fontSize: 14,
     color: NpcColors.textPrimary,
     height: 1.3,

@@ -119,11 +119,8 @@ class TranslationsResultEn {
 	/// en: 'take again'
 	String get retryButton => 'take again';
 
-	/// en: 'become a 6-figure engineer'
-	String get ctaButton => 'become a 6-figure engineer';
-
-	/// en: 'stop being an NPC'
-	String get ctaSubtitle => 'stop being an NPC';
+	/// en: 'learn to sell yourself better'
+	String get ctaButton => 'learn to sell yourself better';
 }
 
 // Path: share
@@ -142,6 +139,12 @@ class TranslationsShareEn {
 
 	/// en: 'i'm ${score}% npc developer. check yours:'
 	String shareMessage({required Object score}) => 'i\'m ${score}% npc developer. check yours:';
+
+	/// en: '> npc_detector --scan'
+	String get storyCommand => '> npc_detector --scan';
+
+	/// en: 'npc developer detector'
+	String get storyBranding => 'npc developer detector';
 }
 
 // Path: quiz.q1
@@ -410,11 +413,12 @@ extension on Translations {
 			'result.tierDangerous.messages.3' => 'the matrix has no power over you.',
 			'result.shareButton' => 'share your result',
 			'result.retryButton' => 'take again',
-			'result.ctaButton' => 'become a 6-figure engineer',
-			'result.ctaSubtitle' => 'stop being an NPC',
+			'result.ctaButton' => 'learn to sell yourself better',
 			'share.storyText' => ({required Object score}) => 'i\'m ${score}% npc developer',
 			'share.storySubtext' => 'are you an npc dev? find out:',
 			'share.shareMessage' => ({required Object score}) => 'i\'m ${score}% npc developer. check yours:',
+			'share.storyCommand' => '> npc_detector --scan',
+			'share.storyBranding' => 'npc developer detector',
 			_ => null,
 		};
 	}

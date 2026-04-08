@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:npc_developer_detector/ds/ds.dart';
 import 'package:npc_developer_detector/gen/strings.g.dart';
+import 'package:npc_developer_detector/models/models.dart';
 import 'package:npc_developer_detector/router/app_router.dart';
 import 'package:npc_developer_detector/viewmodels/quiz_viewmodel.dart';
+import 'package:npc_developer_detector/viewmodels/states/quiz_view_state.dart';
 
 class QuizScreenView extends ConsumerStatefulWidget {
   const QuizScreenView({super.key});
@@ -18,6 +20,7 @@ class _QuizScreenViewState extends ConsumerState<QuizScreenView>
   late AnimationController _transitionController;
   late Animation<double> _fadeAnim;
   late Animation<Offset> _slideAnim;
+  late List<QuizQuestion> _questions;
   int _displayedQuestion = 0;
 
   @override
@@ -31,13 +34,17 @@ class _QuizScreenViewState extends ConsumerState<QuizScreenView>
       parent: _transitionController,
       curve: NpcCurves.standard,
     );
-    _slideAnim = Tween<Offset>(begin: const Offset(NpcCurves.slideOffsetHorizontalSm, 0), end: Offset.zero)
-        .animate(
+    _slideAnim =
+        Tween<Offset>(
+          begin: const Offset(NpcCurves.slideOffsetHorizontalSm, 0),
+          end: Offset.zero,
+        ).animate(
           CurvedAnimation(
             parent: _transitionController,
             curve: NpcCurves.standard,
           ),
         );
+    _questions = ref.read(quizViewModelProvider.notifier).getQuestions();
     _transitionController.forward();
   }
 
@@ -56,37 +63,34 @@ class _QuizScreenViewState extends ConsumerState<QuizScreenView>
 
   @override
   Widget build(BuildContext context) {
-    final quizState = ref.watch(quizViewModelProvider);
-    final viewModel = ref.read(quizViewModelProvider.notifier);
-    final questions = viewModel.getQuestions();
-    final t = Translations.of(context);
+    final QuizViewState quizState = ref.watch(quizViewModelProvider);
+    final Translations t = Translations.of(context);
 
-    // Animate when question changes
     if (_displayedQuestion != quizState.currentQuestion) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _animateToNextQuestion(quizState.currentQuestion);
       });
     }
 
-    final question = questions[_displayedQuestion];
-    final labels = ['a', 'b', 'c', 'd'];
-    final selectedIndex = _displayedQuestion < quizState.answers.length
+    final QuizQuestion question = _questions[_displayedQuestion];
+    const List<String> labels = ['a', 'b', 'c', 'd'];
+    final int selectedIndex = _displayedQuestion < quizState.answers.length
         ? quizState.answers[_displayedQuestion]
         : -1;
 
-    return MatrixBackground(
-      child: NpcPageLayout(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: DoodleBackground(
+        child: NpcPageLayout(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               const SizedBox(height: NpcSpacing.md),
 
-              // Progress bar
               AnimatedProgressBar(progress: quizState.progress),
 
               const SizedBox(height: NpcSpacing.sm),
 
-              // Question counter
               Text(
                 t.quiz.questionOf(
                   current: (quizState.currentQuestion + 1).toString(),
@@ -97,7 +101,6 @@ class _QuizScreenViewState extends ConsumerState<QuizScreenView>
 
               const SizedBox(height: NpcSpacing.xxl),
 
-              // Question title
               FadeTransition(
                 opacity: _fadeAnim,
                 child: SlideTransition(
@@ -111,7 +114,6 @@ class _QuizScreenViewState extends ConsumerState<QuizScreenView>
 
               const SizedBox(height: NpcSpacing.xl),
 
-              // Options
               Expanded(
                 child: FadeTransition(
                   opacity: _fadeAnim,
@@ -121,15 +123,20 @@ class _QuizScreenViewState extends ConsumerState<QuizScreenView>
                       itemCount: question.options.length,
                       separatorBuilder: (_, _) =>
                           const SizedBox(height: NpcSpacing.sm),
-                      itemBuilder: (context, index) {
+                      itemBuilder: (BuildContext context, int index) {
                         return TweenAnimationBuilder<double>(
                           tween: Tween(begin: 0, end: 1),
-                          duration: NpcDurations.staggerBase + NpcDurations.staggerStep * index,
+                          duration:
+                              NpcDurations.staggerBase +
+                              NpcDurations.staggerStep * index,
                           curve: NpcCurves.standard,
                           builder: (context, value, child) => Opacity(
                             opacity: value,
                             child: Transform.translate(
-                              offset: Offset(0, NpcCurves.slideDistanceSm * (1 - value)),
+                              offset: Offset(
+                                0,
+                                NpcCurves.slideDistanceSm * (1 - value),
+                              ),
                               child: child,
                             ),
                           ),
@@ -138,7 +145,9 @@ class _QuizScreenViewState extends ConsumerState<QuizScreenView>
                             label: labels[index],
                             isSelected: selectedIndex == index,
                             index: index,
-                            onTap: () => viewModel.selectAnswer(index),
+                            onTap: () => ref
+                                .read(quizViewModelProvider.notifier)
+                                .selectAnswer(index),
                           ),
                         );
                       },
@@ -149,7 +158,6 @@ class _QuizScreenViewState extends ConsumerState<QuizScreenView>
 
               const SizedBox(height: NpcSpacing.md),
 
-              // Next / Show Result button
               AnimatedOpacity(
                 duration: NpcDurations.normal,
                 opacity: quizState.hasAnsweredCurrent ? 1.0 : 0.3,
@@ -159,7 +167,9 @@ class _QuizScreenViewState extends ConsumerState<QuizScreenView>
                       : t.quiz.nextButton,
                   onPressed: quizState.hasAnsweredCurrent
                       ? () {
-                          viewModel.nextQuestion();
+                          ref
+                              .read(quizViewModelProvider.notifier)
+                              .nextQuestion();
                           if (quizState.isLastQuestion) {
                             context.go(AppRoutes.result);
                           }
@@ -168,8 +178,9 @@ class _QuizScreenViewState extends ConsumerState<QuizScreenView>
                 ),
               ),
 
-            const SizedBox(height: NpcSpacing.lg),
-          ],
+              const SizedBox(height: NpcSpacing.lg),
+            ],
+          ),
         ),
       ),
     );

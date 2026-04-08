@@ -5,26 +5,24 @@ import 'package:npc_developer_detector/screens/landing_screen.dart';
 import 'package:npc_developer_detector/screens/quiz_screen.dart';
 import 'package:npc_developer_detector/screens/result_screen.dart';
 
-/// Route paths
 abstract class AppRoutes {
   static const String landing = '/';
   static const String quiz = '/quiz';
   static const String result = '/result';
 }
 
-/// GoRouter configuration provider
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: AppRoutes.landing,
-    debugLogDiagnostics: true,
     routes: [
       GoRoute(
         path: AppRoutes.landing,
         name: 'landing',
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const LandingScreen(),
+          child: const RepaintBoundary(child: LandingScreen()),
           transitionsBuilder: _fadeSlideTransition,
+          transitionDuration: const Duration(milliseconds: 250),
         ),
       ),
       GoRoute(
@@ -32,8 +30,9 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         name: 'quiz',
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const QuizScreenView(),
+          child: const RepaintBoundary(child: QuizScreenView()),
           transitionsBuilder: _fadeSlideTransition,
+          transitionDuration: const Duration(milliseconds: 250),
         ),
       ),
       GoRoute(
@@ -41,34 +40,36 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         name: 'result',
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
-          child: const ResultScreen(),
+          child: const RepaintBoundary(child: ResultScreen()),
           transitionsBuilder: _fadeSlideTransition,
+          transitionDuration: const Duration(milliseconds: 250),
         ),
       ),
     ],
   );
 });
 
-/// Custom fade + slide transition
 Widget _fadeSlideTransition(
   BuildContext context,
   Animation<double> animation,
   Animation<double> secondaryAnimation,
   Widget child,
 ) {
-  const begin = Offset(0, 0.02);
-  const end = Offset.zero;
-  const curve = Curves.easeOutCubic;
+  const Offset begin = Offset(0, 0.015);
+  const Offset end = Offset.zero;
+  const Curve curve = Curves.easeOutCubic;
 
-  final tween = Tween(begin: begin, end: end).chain(
-    CurveTween(curve: curve),
+  final Tween<Offset> slideTween = Tween(begin: begin, end: end);
+  final CurveTween curveTween = CurveTween(curve: curve);
+  final Animation<Offset> slideAnimation = animation.drive(
+    slideTween.chain(curveTween),
   );
 
-  return FadeTransition(
-    opacity: animation,
-    child: SlideTransition(
-      position: animation.drive(tween),
-      child: child,
-    ),
+  final CurveTween fadeCurve = CurveTween(curve: Curves.easeIn);
+  final Animation<double> fadeAnimation = animation.drive(fadeCurve);
+
+  return SlideTransition(
+    position: slideAnimation,
+    child: FadeTransition(opacity: fadeAnimation, child: child),
   );
 }

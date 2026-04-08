@@ -3,13 +3,11 @@ import 'package:npc_developer_detector/data/datasources/local_quiz_datasource.da
 import 'package:npc_developer_detector/data/datasources/quiz_datasource.dart';
 import 'package:npc_developer_detector/data/repositories/quiz_repository.dart';
 
-/// Provider for QuizDataSource
 final quizDataSourceProvider = Provider<QuizDataSource>((ref) {
   return LocalQuizDataSource();
 });
 
-/// Provider for QuizRepository
 final quizRepositoryProvider = Provider<QuizRepository>((ref) {
-  final dataSource = ref.watch(quizDataSourceProvider);
+  final QuizDataSource dataSource = ref.watch(quizDataSourceProvider);
   return QuizRepository(dataSource);
 });

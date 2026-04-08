@@ -4,9 +4,9 @@ class AnimatedProgressBar extends StatelessWidget {
   const AnimatedProgressBar({
     required this.progress,
     super.key,
-    this.height = 3,
+    this.height = 12,
   });
-  final double progress; // 0.0 to 1.0
+  final double progress;
   final double height;
 
   @override
@@ -17,6 +17,10 @@ class AnimatedProgressBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: NpcColors.surfaceLight,
         borderRadius: BorderRadius.circular(height / 2),
+        border: Border.all(
+          color: NpcColors.border,
+          width: NpcSpacing.borderThin,
+        ),
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -28,9 +32,8 @@ class AnimatedProgressBar extends StatelessWidget {
                 width: constraints.maxWidth * progress,
                 height: height,
                 decoration: BoxDecoration(
-                  color: NpcColors.matrixGreen,
+                  color: NpcColors.primary,
                   borderRadius: BorderRadius.circular(height / 2),
-                  boxShadow: NpcShadows.glowGreen(intensity: 0.4),
                 ),
               ),
             ],

@@ -4,8 +4,6 @@ import 'package:npc_developer_detector/data/datasources/quiz_datasource.dart';
 import 'package:npc_developer_detector/gen/strings.g.dart';
 import 'package:npc_developer_detector/models/models.dart';
 
-/// Local hardcoded implementation of QuizDataSource
-/// This can be easily replaced with a remote data source in the future
 class LocalQuizDataSource implements QuizDataSource {
   @override
   List<QuizQuestion> getQuestions() {
@@ -165,33 +163,34 @@ class LocalQuizDataSource implements QuizDataSource {
 
   @override
   QuizResult calculateResult(List<int> answers) {
-    final questions = getQuestions();
-    int rawScore = 50; // Start at midpoint
+    final List<QuizQuestion> questions = getQuestions();
+    // Start at midpoint
+    int rawScore = 50;
 
-    for (var i = 0; i < answers.length; i++) {
+    for (int i = 0; i < answers.length; i++) {
       if (i < questions.length && answers[i] < questions[i].options.length) {
         rawScore += questions[i].options[answers[i]].weight;
       }
     }
 
-    final score = rawScore.clamp(0, 100);
-    final tier = getTierFromScore(score);
-    final random = Random();
+    final int score = rawScore.clamp(0, 100);
+    final ResultTier tier = ResultTier.fromScore(score);
+    final Random random = Random();
 
     String label;
     String message;
     switch (tier) {
       case ResultTier.npc:
         label = t.result.tierNpc.label;
-        final msgs = t.result.tierNpc.messages;
+        final List<String> msgs = t.result.tierNpc.messages;
         message = msgs[random.nextInt(msgs.length)];
       case ResultTier.borderline:
         label = t.result.tierBorderline.label;
-        final borderlineMsgs = t.result.tierBorderline.messages;
+        final List<String> borderlineMsgs = t.result.tierBorderline.messages;
         message = borderlineMsgs[random.nextInt(borderlineMsgs.length)];
       case ResultTier.dangerous:
         label = t.result.tierDangerous.label;
-        final dangerousMsgs = t.result.tierDangerous.messages;
+        final List<String> dangerousMsgs = t.result.tierDangerous.messages;
         message = dangerousMsgs[random.nextInt(dangerousMsgs.length)];
     }
 

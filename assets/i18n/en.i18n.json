@@ -85,12 +85,13 @@
     },
     "shareButton": "share your result",
     "retryButton": "take again",
-    "ctaButton": "become a 6-figure engineer",
-    "ctaSubtitle": "stop being an NPC"
+    "ctaButton": "learn to sell yourself better"
   },
   "share": {
     "storyText": "i'm ${score}% npc developer",
     "storySubtext": "are you an npc dev? find out:",
-    "shareMessage": "i'm ${score}% npc developer. check yours:"
+    "shareMessage": "i'm ${score}% npc developer. check yours:",
+    "storyCommand": "> npc_detector --scan",
+    "storyBranding": "npc developer detector"
   }
 }

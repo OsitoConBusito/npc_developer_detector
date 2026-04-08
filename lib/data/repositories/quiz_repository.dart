@@ -1,8 +1,6 @@
 import 'package:npc_developer_detector/data/datasources/quiz_datasource.dart';
 import 'package:npc_developer_detector/models/models.dart';
 
-/// Repository for quiz data
-/// Acts as a single source of truth and abstracts the data source
 class QuizRepository {
   QuizRepository(this._dataSource);
 

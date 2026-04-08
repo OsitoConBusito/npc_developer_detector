@@ -12,8 +12,6 @@ class NpcDurations {
   // Screen-specific
   static const Duration pulse = Duration(milliseconds: 2000);
   static const Duration scoreReveal = Duration(milliseconds: 1500);
-  static const Duration matrixLoop = Duration(seconds: 10);
-  static const Duration glitchFlash = Duration(milliseconds: 150);
 
   // Staggered animations
   static const Duration staggerBase = Duration(milliseconds: 300);

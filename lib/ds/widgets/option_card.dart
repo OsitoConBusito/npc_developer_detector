@@ -16,6 +16,20 @@ class OptionCard extends StatefulWidget {
   final VoidCallback onTap;
   final int index;
 
+  static const List<Color> _pastelColors = [
+    NpcColors.pastelYellow,
+    NpcColors.pastelPink,
+    NpcColors.pastelBlue,
+    NpcColors.pastelPurple,
+  ];
+
+  static const List<Color> _pastelColorsDark = [
+    NpcColors.pastelYellowDark,
+    NpcColors.pastelGreenDark,
+    NpcColors.pastelBlueDark,
+    NpcColors.pastelPurpleDark,
+  ];
+
   @override
   State<OptionCard> createState() => _OptionCardState();
 }
@@ -43,15 +57,11 @@ class _OptionCardState extends State<OptionCard>
 
   @override
   Widget build(BuildContext context) {
-    final borderColor = widget.isSelected
-        ? NpcColors.matrixGreen
-        : NpcColors.border;
-    final bgColor = widget.isSelected
-        ? NpcColors.matrixGreenSubtle
-        : NpcColors.surface;
-    final labelColor = widget.isSelected
-        ? NpcColors.matrixGreen
-        : NpcColors.textMuted;
+    final List<Color> pastels = NpcColors.isDark
+        ? OptionCard._pastelColorsDark
+        : OptionCard._pastelColors;
+    final Color pastelBg = pastels[widget.index % pastels.length];
+    final Color borderColor = NpcColors.border;
 
     return AnimatedBuilder(
       animation: _scaleAnim,
@@ -70,15 +80,15 @@ class _OptionCardState extends State<OptionCard>
           width: double.infinity,
           padding: NpcSpacing.optionCardPadding,
           decoration: BoxDecoration(
-            color: bgColor,
+            color: widget.isSelected ? pastelBg : NpcColors.surface,
             borderRadius: BorderRadius.circular(NpcSpacing.radiusMd),
             border: Border.all(
               color: borderColor,
-              width: widget.isSelected ? 1.5 : 1,
+              width: widget.isSelected
+                  ? NpcSpacing.borderThick
+                  : NpcSpacing.borderThin,
             ),
-            boxShadow: widget.isSelected
-                ? NpcShadows.glowGreen(intensity: 0.3)
-                : null,
+            boxShadow: widget.isSelected ? NpcShadows.hard() : NpcShadows.hardSmall(),
           ),
           child: Row(
             children: [
@@ -87,17 +97,18 @@ class _OptionCardState extends State<OptionCard>
                 width: NpcSpacing.optionLabelSize,
                 height: NpcSpacing.optionLabelSize,
                 decoration: BoxDecoration(
-                  color: widget.isSelected
-                      ? NpcColors.matrixGreen.withValues(alpha: 0.15)
-                      : Colors.transparent,
+                  color: widget.isSelected ? NpcColors.primary : NpcColors.surfaceLight,
                   borderRadius: BorderRadius.circular(NpcSpacing.radiusSm),
-                  border: Border.all(color: labelColor),
+                  border: Border.all(
+                    color: borderColor,
+                    width: NpcSpacing.borderThin,
+                  ),
                 ),
                 child: Center(
                   child: Text(
                     widget.label,
                     style: NpcTypography.bodySmall.copyWith(
-                      color: labelColor,
+                      color: widget.isSelected ? Colors.white : NpcColors.textPrimary,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -106,20 +117,19 @@ class _OptionCardState extends State<OptionCard>
               const SizedBox(width: NpcSpacing.sm + NpcSpacing.xs),
               Expanded(
                 child: Text(
-                  widget.text.toLowerCase(),
+                  widget.text,
                   style: NpcTypography.optionText.copyWith(
-                    color: widget.isSelected
-                        ? NpcColors.textPrimary
-                        : NpcColors.textSecondary,
+                    color: NpcColors.textPrimary,
+                    fontWeight: widget.isSelected ? FontWeight.w700 : null,
                   ),
                 ),
               ),
               AnimatedOpacity(
                 duration: NpcDurations.normal,
                 opacity: widget.isSelected ? 1.0 : 0.0,
-                child: const Icon(
-                  Icons.check_circle,
-                  color: NpcColors.matrixGreen,
+                child: Icon(
+                  Icons.check_circle_rounded,
+                  color: NpcColors.primary,
                   size: NpcSpacing.iconSm,
                 ),
               ),

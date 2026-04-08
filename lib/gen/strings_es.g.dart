@@ -50,7 +50,7 @@ class _TranslationsLandingEs implements TranslationsLandingEn {
 	final TranslationsEs _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'eres un developer\nnpc?';
+	@override String get title => '¿eres un developer\nnpc?';
 	@override String get subtitle => 'se honesto. esto puede doler.';
 	@override String get startButton => 'descubrir';
 	@override String get skipButton => 'ya lo se';
@@ -89,8 +89,7 @@ class _TranslationsResultEs implements TranslationsResultEn {
 	@override late final _TranslationsResultTierDangerousEs tierDangerous = _TranslationsResultTierDangerousEs._(_root);
 	@override String get shareButton => 'compartir resultado';
 	@override String get retryButton => 'intentar de nuevo';
-	@override String get ctaButton => 'conviertete en 6-figure engineer';
-	@override String get ctaSubtitle => 'deja de ser un NPC';
+	@override String get ctaButton => 'aprende a venderte mejor';
 }
 
 // Path: share
@@ -101,8 +100,10 @@ class _TranslationsShareEs implements TranslationsShareEn {
 
 	// Translations
 	@override String storyText({required Object score}) => 'soy ${score}% developer npc';
-	@override String get storySubtext => 'eres un dev npc? descubrelo:';
+	@override String get storySubtext => '¿eres un dev npc? descúbrelo:';
 	@override String shareMessage({required Object score}) => 'soy ${score}% developer npc. descubre el tuyo:';
+	@override String get storyCommand => '> npc_detector --scan';
+	@override String get storyBranding => 'npc developer detector';
 }
 
 // Path: quiz.q1
@@ -112,7 +113,7 @@ class _TranslationsQuizQ1Es implements TranslationsQuizQ1En {
 	final TranslationsEs _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'cuando tienes un bug,\nque es lo primero que haces?';
+	@override String get title => 'cuando tienes un bug,\n¿qué es lo primero que haces?';
 	@override String get a => 'copiar el error en stackoverflow';
 	@override String get b => 'pegarlo en chatgpt y esperar';
 	@override String get c => 'leer el stack trace y debuguear';
@@ -126,7 +127,7 @@ class _TranslationsQuizQ2Es implements TranslationsQuizQ2En {
 	final TranslationsEs _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'como empiezas\nun proyecto nuevo?';
+	@override String get title => '¿cómo empiezas\nun proyecto nuevo?';
 	@override String get a => 'buscar un tutorial y seguirlo paso a paso';
 	@override String get b => 'clonar un template o boilerplate';
 	@override String get c => 'disenar la arquitectura y construir';
@@ -140,7 +141,7 @@ class _TranslationsQuizQ3Es implements TranslationsQuizQ3En {
 	final TranslationsEs _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'cual es tu relacion\ncon herramientas de AI?';
+	@override String get title => '¿cuál es tu relación\ncon herramientas de AI?';
 	@override String get a => 'chatgpt escribe la mayoria de mi codigo';
 	@override String get b => 'la uso para aprender, pero yo escribo mi codigo';
 	@override String get c => 'copilot autocompleta, yo solo presiono tab';
@@ -154,7 +155,7 @@ class _TranslationsQuizQ4Es implements TranslationsQuizQ4En {
 	final TranslationsEs _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'como aprendes\ntecnologia nueva?';
+	@override String get title => '¿cómo aprendes\ntecnología nueva?';
 	@override String get a => 'maratonear un curso de 10 horas en youtube';
 	@override String get b => 'seguir el tutorial de la documentacion oficial';
 	@override String get c => 'construir algo real con ella de inmediato';
@@ -168,7 +169,7 @@ class _TranslationsQuizQ5Es implements TranslationsQuizQ5En {
 	final TranslationsEs _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'que pasa despues de\nque shipeas una feature?';
+	@override String get title => '¿qué pasa después de\nque shipeas una feature?';
 	@override String get a => 'paso al siguiente ticket inmediatamente';
 	@override String get b => 'posteo sobre ello en redes sociales';
 	@override String get c => 'hablo con usuarios y mido el impacto';
@@ -182,7 +183,7 @@ class _TranslationsQuizQ6Es implements TranslationsQuizQ6En {
 	final TranslationsEs _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'que haces los\nfines de semana?';
+	@override String get title => '¿qué haces los\nfines de semana?';
 	@override String get a => 'mas tutoriales y cursos';
 	@override String get b => 'scrollear twitter y reddit de devs';
 	@override String get c => 'construir side projects y shipearlos';
@@ -245,39 +246,39 @@ class _TranslationsResultTierDangerousEs implements TranslationsResultTierDanger
 extension on TranslationsEs {
 	dynamic _flatMapFunction(String path) {
 		return switch (path) {
-			'landing.title' => 'eres un developer\nnpc?',
+			'landing.title' => '¿eres un developer\nnpc?',
 			'landing.subtitle' => 'se honesto. esto puede doler.',
 			'landing.startButton' => 'descubrir',
 			'landing.skipButton' => 'ya lo se',
 			'quiz.questionOf' => ({required Object current, required Object total}) => 'pregunta ${current} de ${total}',
 			'quiz.nextButton' => 'siguiente',
 			'quiz.showResult' => 'muestrame la verdad',
-			'quiz.q1.title' => 'cuando tienes un bug,\nque es lo primero que haces?',
+			'quiz.q1.title' => 'cuando tienes un bug,\n¿qué es lo primero que haces?',
 			'quiz.q1.a' => 'copiar el error en stackoverflow',
 			'quiz.q1.b' => 'pegarlo en chatgpt y esperar',
 			'quiz.q1.c' => 'leer el stack trace y debuguear',
 			'quiz.q1.d' => 'console.log por todos lados y rezar',
-			'quiz.q2.title' => 'como empiezas\nun proyecto nuevo?',
+			'quiz.q2.title' => '¿cómo empiezas\nun proyecto nuevo?',
 			'quiz.q2.a' => 'buscar un tutorial y seguirlo paso a paso',
 			'quiz.q2.b' => 'clonar un template o boilerplate',
 			'quiz.q2.c' => 'disenar la arquitectura y construir',
 			'quiz.q2.d' => 'pedirle a la AI que genere todo',
-			'quiz.q3.title' => 'cual es tu relacion\ncon herramientas de AI?',
+			'quiz.q3.title' => '¿cuál es tu relación\ncon herramientas de AI?',
 			'quiz.q3.a' => 'chatgpt escribe la mayoria de mi codigo',
 			'quiz.q3.b' => 'la uso para aprender, pero yo escribo mi codigo',
 			'quiz.q3.c' => 'copilot autocompleta, yo solo presiono tab',
 			'quiz.q3.d' => 'casi no uso herramientas de AI',
-			'quiz.q4.title' => 'como aprendes\ntecnologia nueva?',
+			'quiz.q4.title' => '¿cómo aprendes\ntecnología nueva?',
 			'quiz.q4.a' => 'maratonear un curso de 10 horas en youtube',
 			'quiz.q4.b' => 'seguir el tutorial de la documentacion oficial',
 			'quiz.q4.c' => 'construir algo real con ella de inmediato',
 			'quiz.q4.d' => 'esperar a que alguien haga un tutorial',
-			'quiz.q5.title' => 'que pasa despues de\nque shipeas una feature?',
+			'quiz.q5.title' => '¿qué pasa después de\nque shipeas una feature?',
 			'quiz.q5.a' => 'paso al siguiente ticket inmediatamente',
 			'quiz.q5.b' => 'posteo sobre ello en redes sociales',
 			'quiz.q5.c' => 'hablo con usuarios y mido el impacto',
 			'quiz.q5.d' => 'no he shipeado nada todavia',
-			'quiz.q6.title' => 'que haces los\nfines de semana?',
+			'quiz.q6.title' => '¿qué haces los\nfines de semana?',
 			'quiz.q6.a' => 'mas tutoriales y cursos',
 			'quiz.q6.b' => 'scrollear twitter y reddit de devs',
 			'quiz.q6.c' => 'construir side projects y shipearlos',
@@ -302,11 +303,12 @@ extension on TranslationsEs {
 			'result.tierDangerous.messages.3' => 'el matrix no tiene poder sobre ti.',
 			'result.shareButton' => 'compartir resultado',
 			'result.retryButton' => 'intentar de nuevo',
-			'result.ctaButton' => 'conviertete en 6-figure engineer',
-			'result.ctaSubtitle' => 'deja de ser un NPC',
+			'result.ctaButton' => 'aprende a venderte mejor',
 			'share.storyText' => ({required Object score}) => 'soy ${score}% developer npc',
-			'share.storySubtext' => 'eres un dev npc? descubrelo:',
+			'share.storySubtext' => '¿eres un dev npc? descúbrelo:',
 			'share.shareMessage' => ({required Object score}) => 'soy ${score}% developer npc. descubre el tuyo:',
+			'share.storyCommand' => '> npc_detector --scan',
+			'share.storyBranding' => 'npc developer detector',
 			_ => null,
 		};
 	}

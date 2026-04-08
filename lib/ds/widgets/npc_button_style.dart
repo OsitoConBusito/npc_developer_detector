@@ -10,17 +10,18 @@ abstract class NpcButtonStyle {
 class PrimaryButtonStyle extends NpcButtonStyle {
   @override
   Color getBackgroundColor({required bool isPressed}) =>
-      isPressed ? NpcColors.matrixGreenDim : NpcColors.matrixGreen;
+      isPressed ? NpcColors.primaryDim : NpcColors.primary;
 
   @override
-  Color getTextColor() => NpcColors.background;
+  Color getTextColor() => Colors.white;
 
   @override
-  Border? getBorder() => null;
+  Border? getBorder() =>
+      Border.all(color: NpcColors.border, width: NpcSpacing.borderThin);
 
   @override
   List<BoxShadow>? getShadow({required bool isPressed}) =>
-      !isPressed ? NpcShadows.glowGreen(intensity: 0.5) : null;
+      isPressed ? null : NpcShadows.hard();
 }
 
 class SecondaryButtonStyle extends NpcButtonStyle {
@@ -29,14 +30,15 @@ class SecondaryButtonStyle extends NpcButtonStyle {
       isPressed ? NpcColors.surfaceLight : NpcColors.surface;
 
   @override
-  Color getTextColor() => NpcColors.matrixGreen;
+  Color getTextColor() => NpcColors.textPrimary;
 
   @override
   Border? getBorder() =>
-      Border.all(color: NpcColors.matrixGreen.withValues(alpha: 0.3));
+      Border.all(color: NpcColors.border, width: NpcSpacing.borderThin);
 
   @override
-  List<BoxShadow>? getShadow({required bool isPressed}) => null;
+  List<BoxShadow>? getShadow({required bool isPressed}) =>
+      isPressed ? null : NpcShadows.hardSmall();
 }
 
 class GhostButtonStyle extends NpcButtonStyle {

@@ -1,6 +1,6 @@
 {
   "landing": {
-    "title": "eres un developer\nnpc?",
+    "title": "¿eres un developer\nnpc?",
     "subtitle": "se honesto. esto puede doler.",
     "startButton": "descubrir",
     "skipButton": "ya lo se"
@@ -10,42 +10,42 @@
     "nextButton": "siguiente",
     "showResult": "muestrame la verdad",
     "q1": {
-      "title": "cuando tienes un bug,\nque es lo primero que haces?",
+      "title": "cuando tienes un bug,\n¿qué es lo primero que haces?",
       "a": "copiar el error en stackoverflow",
       "b": "pegarlo en chatgpt y esperar",
       "c": "leer el stack trace y debuguear",
       "d": "console.log por todos lados y rezar"
     },
     "q2": {
-      "title": "como empiezas\nun proyecto nuevo?",
+      "title": "¿cómo empiezas\nun proyecto nuevo?",
       "a": "buscar un tutorial y seguirlo paso a paso",
       "b": "clonar un template o boilerplate",
       "c": "disenar la arquitectura y construir",
       "d": "pedirle a la AI que genere todo"
     },
     "q3": {
-      "title": "cual es tu relacion\ncon herramientas de AI?",
+      "title": "¿cuál es tu relación\ncon herramientas de AI?",
       "a": "chatgpt escribe la mayoria de mi codigo",
       "b": "la uso para aprender, pero yo escribo mi codigo",
       "c": "copilot autocompleta, yo solo presiono tab",
       "d": "casi no uso herramientas de AI"
     },
     "q4": {
-      "title": "como aprendes\ntecnologia nueva?",
+      "title": "¿cómo aprendes\ntecnología nueva?",
       "a": "maratonear un curso de 10 horas en youtube",
       "b": "seguir el tutorial de la documentacion oficial",
       "c": "construir algo real con ella de inmediato",
       "d": "esperar a que alguien haga un tutorial"
     },
     "q5": {
-      "title": "que pasa despues de\nque shipeas una feature?",
+      "title": "¿qué pasa después de\nque shipeas una feature?",
       "a": "paso al siguiente ticket inmediatamente",
       "b": "posteo sobre ello en redes sociales",
       "c": "hablo con usuarios y mido el impacto",
       "d": "no he shipeado nada todavia"
     },
     "q6": {
-      "title": "que haces los\nfines de semana?",
+      "title": "¿qué haces los\nfines de semana?",
       "a": "mas tutoriales y cursos",
       "b": "scrollear twitter y reddit de devs",
       "c": "construir side projects y shipearlos",
@@ -85,12 +85,13 @@
     },
     "shareButton": "compartir resultado",
     "retryButton": "intentar de nuevo",
-    "ctaButton": "conviertete en 6-figure engineer",
-    "ctaSubtitle": "deja de ser un NPC"
+    "ctaButton": "aprende a venderte mejor"
   },
   "share": {
     "storyText": "soy ${score}% developer npc",
-    "storySubtext": "eres un dev npc? descubrelo:",
-    "shareMessage": "soy ${score}% developer npc. descubre el tuyo:"
+    "storySubtext": "¿eres un dev npc? descúbrelo:",
+    "shareMessage": "soy ${score}% developer npc. descubre el tuyo:",
+    "storyCommand": "> npc_detector --scan",
+    "storyBranding": "npc developer detector"
   }
 }

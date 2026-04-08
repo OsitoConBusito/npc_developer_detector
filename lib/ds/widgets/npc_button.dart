@@ -96,7 +96,7 @@ class _NpcButtonState extends State<NpcButton>
                     ),
                   )
                 : Text(
-                    widget.text.toLowerCase(),
+                    widget.text,
                     style: NpcTypography.buttonLarge.copyWith(
                       color: _style.getTextColor(),
                     ),

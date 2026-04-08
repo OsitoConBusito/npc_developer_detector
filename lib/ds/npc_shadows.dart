@@ -3,32 +3,27 @@ part of 'ds.dart';
 class NpcShadows {
   NpcShadows._();
 
-  static List<BoxShadow> glowGreen({double intensity = 1.0}) => [
+  /// Neo-brutal hard drop shadow (no blur, solid offset)
+  static List<BoxShadow> hard({Color? color, double offset = 4}) => [
     BoxShadow(
-      color: NpcColors.matrixGreen.withValues(alpha: 0.3 * intensity),
-      blurRadius: 12 * intensity,
-      spreadRadius: 2 * intensity,
-    ),
-    BoxShadow(
-      color: NpcColors.matrixGreen.withValues(alpha: 0.1 * intensity),
-      blurRadius: 30 * intensity,
-      spreadRadius: 5 * intensity,
+      color: color ?? NpcColors.border,
+      offset: Offset(offset, offset),
     ),
   ];
 
-  static List<BoxShadow> glowRed({double intensity = 1.0}) => [
-    BoxShadow(
-      color: NpcColors.npcRed.withValues(alpha: 0.3 * intensity),
-      blurRadius: 12 * intensity,
-      spreadRadius: 2 * intensity,
-    ),
-  ];
+  static List<BoxShadow> hardSmall({Color? color}) =>
+      hard(color: color, offset: 2);
 
-  static List<BoxShadow> glowYellow({double intensity = 1.0}) => [
-    BoxShadow(
-      color: NpcColors.borderlineYellow.withValues(alpha: 0.3 * intensity),
-      blurRadius: 12 * intensity,
-      spreadRadius: 2 * intensity,
-    ),
-  ];
+  static List<BoxShadow> hardLarge({Color? color}) =>
+      hard(color: color, offset: 6);
+
+  // Tier glows (kept for result screen emphasis, but as hard shadows)
+  static List<BoxShadow> glowRed({double intensity = 1.0}) =>
+      hard(color: NpcColors.coral.withValues(alpha: 0.6 * intensity));
+
+  static List<BoxShadow> glowYellow({double intensity = 1.0}) =>
+      hard(color: NpcColors.yellow.withValues(alpha: 0.6 * intensity));
+
+  static List<BoxShadow> glowGreen({double intensity = 1.0}) =>
+      hard(color: NpcColors.turquoise.withValues(alpha: 0.6 * intensity));
 }

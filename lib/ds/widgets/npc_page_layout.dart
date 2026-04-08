@@ -3,12 +3,14 @@ part of '../ds.dart';
 class NpcPageLayout extends StatelessWidget {
   const NpcPageLayout({
     required this.child,
-    this.showLanguageSwitcher = true,
+    this.showLanguageSwitcher = false,
+    this.showThemeToggle = false,
     super.key,
   });
 
   final Widget child;
   final bool showLanguageSwitcher;
+  final bool showThemeToggle;
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +28,19 @@ class NpcPageLayout extends StatelessWidget {
               ),
             ),
           ),
-          if (showLanguageSwitcher)
-            const Positioned(
+          if (showThemeToggle || showLanguageSwitcher)
+            Positioned(
               top: NpcSpacing.sm,
               right: NpcSpacing.md,
-              child: LanguageSwitcher(),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (showLanguageSwitcher) const LanguageSwitcher(),
+                  if (showLanguageSwitcher && showThemeToggle)
+                    const SizedBox(width: NpcSpacing.sm),
+                  if (showThemeToggle) const ThemeToggle(),
+                ],
+              ),
             ),
         ],
       ),

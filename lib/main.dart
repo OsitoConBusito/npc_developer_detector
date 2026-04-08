@@ -1,12 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:npc_developer_detector/ds/ds.dart';
+import 'package:npc_developer_detector/firebase_options.dart';
 import 'package:npc_developer_detector/gen/strings.g.dart';
 import 'package:npc_developer_detector/router/app_router.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  LocaleSettings.useDeviceLocale();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  LocaleSettings.setLocale(AppLocale.en);
   runApp(ProviderScope(child: TranslationProvider(child: const NpcApp())));
 }
 
@@ -16,18 +19,13 @@ class NpcApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(goRouterProvider);
+    final bool isDark = ref.watch(themeModeProvider);
 
     return MaterialApp.router(
       title: 'NPC Developer Detector',
       debugShowCheckedModeBanner: false,
       routerConfig: router,
-      theme: ThemeData(
-        scaffoldBackgroundColor: NpcColors.background,
-        colorScheme: const ColorScheme.dark(
-          surface: NpcColors.background,
-          primary: NpcColors.matrixGreen,
-        ),
-      ),
+      theme: npcTheme(isDark: isDark),
     );
   }
 }

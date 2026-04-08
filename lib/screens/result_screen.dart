@@ -7,6 +7,7 @@ import 'package:npc_developer_detector/models/models.dart';
 import 'package:npc_developer_detector/router/app_router.dart';
 import 'package:npc_developer_detector/viewmodels/quiz_viewmodel.dart';
 import 'package:npc_developer_detector/viewmodels/result_viewmodel.dart';
+import 'package:npc_developer_detector/viewmodels/states/quiz_view_state.dart';
 import 'package:npc_developer_detector/widgets/story_card.dart';
 
 class ResultScreen extends ConsumerStatefulWidget {
@@ -68,64 +69,47 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
     super.dispose();
   }
 
-  Color _tierColor(ResultTier tier) {
-    switch (tier) {
-      case ResultTier.npc:
-        return NpcColors.npcRed;
-      case ResultTier.borderline:
-        return NpcColors.borderlineYellow;
-      case ResultTier.dangerous:
-        return NpcColors.dangerousGreen;
-    }
-  }
-
-  List<BoxShadow> _tierGlow(ResultTier tier) {
-    switch (tier) {
-      case ResultTier.npc:
-        return NpcShadows.glowRed();
-      case ResultTier.borderline:
-        return NpcShadows.glowYellow();
-      case ResultTier.dangerous:
-        return NpcShadows.glowGreen();
-    }
-  }
-
   Future<void> _shareResult(QuizResult result) async {
-    final viewModel = ref.read(resultViewModelProvider.notifier);
+    final ResultViewModel viewModel = ref.read(
+      resultViewModelProvider.notifier,
+    );
+    final Translations t = Translations.of(context);
     await viewModel.shareResult(
       result: result,
       storyCard: StoryCard(result: result),
-      context: context,
+      shareMessage: t.share.shareMessage(score: result.score.toString()),
     );
   }
 
   Future<void> _openCourse() async {
-    final viewModel = ref.read(resultViewModelProvider.notifier);
+    final ResultViewModel viewModel = ref.read(
+      resultViewModelProvider.notifier,
+    );
     await viewModel.openCourse();
   }
 
   @override
   Widget build(BuildContext context) {
-    final quizState = ref.watch(quizViewModelProvider);
-    final viewModel = ref.read(quizViewModelProvider.notifier);
-    final result = quizState.result;
-    final t = Translations.of(context);
+    final QuizViewState quizState = ref.watch(quizViewModelProvider);
+    final QuizViewModel viewModel = ref.read(quizViewModelProvider.notifier);
+    final QuizResult? result = quizState.result;
+    final Translations t = Translations.of(context);
 
     if (result == null) {
       return const SizedBox.shrink();
     }
 
-    final tierColor = _tierColor(result.tier);
-    final tierGlow = _tierGlow(result.tier);
+    final Color tierColor = result.tier.color;
 
-    return MatrixBackground(
-      child: NpcPageLayout(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: DoodleBackground(
+        child: NpcPageLayout(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               const Spacer(flex: 2),
 
-              // "you are" label
               FadeTransition(
                 opacity: _fadeAnim,
                 child: Text(t.result.title, style: NpcTypography.bodyLarge),
@@ -133,49 +117,49 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
 
               const SizedBox(height: NpcSpacing.md),
 
-              // Animated score
               AnimatedBuilder(
                 animation: _scoreFillAnim,
                 builder: (context, _) {
-                  final displayScore = (_scoreFillAnim.value * result.score)
+                  final int displayScore = (_scoreFillAnim.value * result.score)
                       .round();
-                  return DecoratedBox(
-                    decoration: BoxDecoration(boxShadow: tierGlow),
-                    child: Text(
-                      '$displayScore%',
-                      style: NpcTypography.scoreDisplay.copyWith(
-                        color: tierColor,
-                      ),
+                  return Text(
+                    '$displayScore%',
+                    style: NpcTypography.scoreDisplay.copyWith(
+                      color: tierColor,
                     ),
                   );
                 },
               ),
 
-              const SizedBox(height: NpcSpacing.sm),
+              const SizedBox(height: NpcSpacing.md),
 
-              // Tier label
               FadeTransition(
                 opacity: _fadeAnim,
                 child: Container(
                   padding: NpcSpacing.tierLabelPadding,
                   decoration: BoxDecoration(
-                    border: Border.all(color: tierColor.withValues(alpha: 0.5)),
-                    borderRadius: BorderRadius.circular(NpcSpacing.radiusXs),
-                    color: tierColor.withValues(alpha: 0.1),
+                    border: Border.all(
+                      color: tierColor,
+                      width: NpcSpacing.borderThick,
+                    ),
+                    borderRadius: BorderRadius.circular(NpcSpacing.radiusMd),
+                    color: tierColor.withValues(alpha: 0.15),
+                    boxShadow: NpcShadows.hard(color: tierColor.withValues(alpha: 0.4)),
                   ),
                   child: Text(
                     result.label,
                     style: NpcTypography.label.copyWith(
                       color: tierColor,
                       letterSpacing: 3,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
               ),
 
-              const SizedBox(height: NpcSpacing.xl),
+              const SizedBox(height: NpcSpacing.xxl),
 
-              // Random message
               FadeTransition(
                 opacity: _messageAnim,
                 child: Text(
@@ -190,28 +174,18 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
 
               const Spacer(flex: 2),
 
-              // Share button
-              NpcButton(
-                text: t.result.shareButton,
-                onPressed: () => _shareResult(result),
-              ),
-
-              const SizedBox(height: NpcSpacing.sm),
-
-              // CTA to course
-              NpcButton(
-                text: t.result.ctaButton,
-                variant: NpcButtonVariant.secondary,
-                onPressed: _openCourse,
-              ),
-
-              const SizedBox(height: NpcSpacing.xs),
-
-              Text(t.result.ctaSubtitle, style: NpcTypography.bodySmall),
+              NpcButton(text: t.result.ctaButton, onPressed: _openCourse),
 
               const SizedBox(height: NpcSpacing.md),
 
-              // Retry
+              NpcButton(
+                text: t.result.shareButton,
+                variant: NpcButtonVariant.secondary,
+                onPressed: () => _shareResult(result),
+              ),
+
+              const SizedBox(height: NpcSpacing.md),
+
               NpcButton(
                 text: t.result.retryButton,
                 variant: NpcButtonVariant.ghost,
@@ -223,6 +197,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen>
 
               const Spacer(),
             ],
+          ),
         ),
       ),
     );

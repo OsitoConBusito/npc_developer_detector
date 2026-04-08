@@ -18,17 +18,22 @@ class NpcSpacing {
 
   // Border radii
   static const double radiusXs = 4;
-  static const double radiusSm = 6;
-  static const double radiusMd = 12;
+  static const double radiusSm = 8;
+  static const double radiusMd = 16;
+  static const double radiusLg = 24;
+
+  // Border widths
+  static const double borderThin = 2;
+  static const double borderThick = 3;
 
   // Component sizes
   static const double iconSm = 20;
-  static const double optionLabelSize = 28;
+  static const double optionLabelSize = 32;
 
   // Component paddings
   static const EdgeInsets buttonPadding = EdgeInsets.symmetric(vertical: 18);
   static const EdgeInsets optionCardPadding =
       EdgeInsets.symmetric(horizontal: 16, vertical: 14);
   static const EdgeInsets tierLabelPadding =
-      EdgeInsets.symmetric(horizontal: 16, vertical: 6);
+      EdgeInsets.symmetric(horizontal: 16, vertical: 8);
 }
