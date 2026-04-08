@@ -1,0 +1,64 @@
+name: npc_developer_detector
+description: "NPC Developer Detector - Are you an NPC developer?"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+
+  # Navigation
+  go_router: ^14.6.2
+
+  # i18n
+  slang: ^4.3.0
+  slang_flutter: ^4.3.0
+
+  # Screenshot / image capture
+  screenshot: ^3.0.0
+
+  # Share
+  share_plus: ^10.0.3
+
+  # Firebase
+  firebase_core: ^3.6.0
+  firebase_analytics: ^11.3.3
+
+  # URL launcher
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.4.13
+  slang_build_runner: ^4.3.0
+  riverpod_generator: ^2.6.1
+  custom_lint: ^0.7.5
+  riverpod_lint: ^2.6.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/i18n/
+
+  fonts:
+    - family: SpaceMono
+      fonts:
+        - asset: assets/fonts/SpaceMono-Regular.ttf
+        - asset: assets/fonts/SpaceMono-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/SpaceMono-Italic.ttf
+          style: italic
+        - asset: assets/fonts/SpaceMono-BoldItalic.ttf
+          weight: 700
+          style: italic

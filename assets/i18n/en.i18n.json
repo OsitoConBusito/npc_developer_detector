@@ -1,0 +1,96 @@
+{
+  "landing": {
+    "title": "are you an npc\ndeveloper?",
+    "subtitle": "be honest. this might hurt.",
+    "startButton": "find out",
+    "skipButton": "i already know"
+  },
+  "quiz": {
+    "questionOf": "question ${current} of ${total}",
+    "nextButton": "next",
+    "showResult": "show me the truth",
+    "q1": {
+      "title": "when you hit a bug,\nwhat's your first move?",
+      "a": "copy the error into stackoverflow",
+      "b": "paste it into chatgpt and wait",
+      "c": "read the stack trace and debug it",
+      "d": "console.log everywhere and pray"
+    },
+    "q2": {
+      "title": "how do you start\na new project?",
+      "a": "find a tutorial and follow it step by step",
+      "b": "clone a template or boilerplate",
+      "c": "design the architecture, then build",
+      "d": "ask AI to generate the whole thing"
+    },
+    "q3": {
+      "title": "what's your relationship\nwith AI tools?",
+      "a": "chatgpt writes most of my code",
+      "b": "I use it to learn, but I write my code",
+      "c": "copilot autocompletes, I just press tab",
+      "d": "I barely use AI tools"
+    },
+    "q4": {
+      "title": "how do you learn\nnew technology?",
+      "a": "binge a 10-hour youtube course",
+      "b": "follow the official docs tutorial",
+      "c": "build something real with it immediately",
+      "d": "wait until someone makes a tutorial"
+    },
+    "q5": {
+      "title": "what happens after\nyou ship a feature?",
+      "a": "move to the next ticket immediately",
+      "b": "post about it on social media",
+      "c": "talk to users and measure impact",
+      "d": "I haven't shipped anything yet"
+    },
+    "q6": {
+      "title": "what do you do\non weekends?",
+      "a": "more tutorials and courses",
+      "b": "scroll dev twitter and reddit",
+      "c": "build side projects and ship them",
+      "d": "same as weekdays, whatever the job asks"
+    }
+  },
+  "result": {
+    "title": "you are",
+    "npcLabel": "npc developer",
+    "scoreFormat": "${score}% npc",
+    "tierNpc": {
+      "label": "NPC DEVELOPER",
+      "messages": [
+        "you don't write code. you assemble it.",
+        "your github is a graveyard of cloned repos.",
+        "you're one mass layoff away from selling courses.",
+        "stack overflow should charge you rent."
+      ]
+    },
+    "tierBorderline": {
+      "label": "BORDERLINE",
+      "messages": [
+        "you have potential. but you're lazy about it.",
+        "one foot in the matrix, one foot out.",
+        "you could be dangerous, but you choose comfort.",
+        "you know what to do. you just don't do it."
+      ]
+    },
+    "tierDangerous": {
+      "label": "DANGEROUS",
+      "messages": [
+        "you actually build things. respect.",
+        "you're the dev they can't replace with AI.",
+        "you ship while others watch tutorials.",
+        "the matrix has no power over you."
+      ]
+    },
+    "shareButton": "share your result",
+    "retryButton": "take again",
+    "ctaButton": "become a 6-figure engineer",
+    "ctaSubtitle": "stop being an NPC"
+  },
+  "share": {
+    "storyText": "i'm ${score}% npc developer",
+    "storySubtext": "are you an npc dev? find out:",
+    "shareMessage": "i'm ${score}% npc developer. check yours:"
+  }
+}
